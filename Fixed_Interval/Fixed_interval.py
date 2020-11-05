@@ -9,6 +9,8 @@ delay_value = .500 ## how fast the audible click is (higher=longer)
 interval_upper = 30 ## highest time interval that can be selected
 interval_lower = 10 ## lowest time interval that can be selected
 timesToClick = 5 ## amount of times the relay should be triggered (default: 10)
+runIterations = 2
+runs = 0
 delay_seconds = 10
 
 f = open('log.txt','w')
@@ -95,15 +97,16 @@ def loop():
                 f.write("Program Finished!")
                 f.write(datetime.datetime.now().strftime('%H%M%S'))
                 break
-    hasRun = False
 
 if __name__== "__main__":
-  while True:
-      ## log program start and date and time
-      setup()      
-      f.write("Program Started!")
-      f.write(datetime.datetime.now().strftime('%H%M%S'))    
+  ## log program start and date and time
+  setup()
+  f.write("Program Started!")
+  f.write(datetime.datetime.now().strftime('%H%M%S'))
+  while runs < runIterations:
+      runs = runs + 1
       loop()
-      f.close()
-      break
+
+  f.close()
+  break
 
