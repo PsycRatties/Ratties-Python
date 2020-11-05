@@ -11,16 +11,14 @@ interval_lower = 10 ## lowest time interval that can be selected
 timesToClick = 5 ## amount of times the relay should be triggered (default: 10)
 runIterations = 2 ## Amount of time the script should loop
 runs = 0 
-delay_seconds = 10
 
-f = open('log.txt','w')
+f = open(('log' + datetime.datetime.now().strftime('%H%M%S') + '.txt'),'w')
 
 def setup():
     """
     function to setup GPIO board for switches.
     Sets input and output of varius pins
     """
-    global delay_seconds
     GPIO.setmode(GPIO.BOARD)
 
     GPIO.setup(31, GPIO.IN) ## right switch (spst momentary n.o.) 2
@@ -32,7 +30,6 @@ def setup():
     GPIO.setup(40, GPIO.IN) ## Left Switch 8
     #Need to change
     GPIO.setup(10, GPIO.OUT) ## Relay 10
-    delay_seconds = delay_seconds * 1000
 
 def triggerRelay():
     """
@@ -64,6 +61,8 @@ def loop():
     hasRun = False
     GPIO.output(33, GPIO.LOW)
     GPIO.output(37, GPIO.LOW)
+    time_to_sleep = random.randint(interval_lower, interval_upper)
+    f.write("Delay input time: " + time_to_sleep)
 
     if (GPIO.input(35) == GPIO.HIGH):
         # log this button being triggered with the time
@@ -71,7 +70,7 @@ def loop():
         f.write(datetime.datetime.now().strftime('%H%M%S'))    
         GPIO.output(37, GPIO.HIGH)
 
-        time.sleep(random.randint(interval_lower, interval_upper))
+        time.sleep(time_to_sleep)
 
         while not hasRun:
             if GPIO.input(31) == GPIO.HIGH:
@@ -90,7 +89,7 @@ def loop():
         f.write(datetime.datetime.now().strftime('%H%M%S')) 
         GPIO.output(33, GPIO.HIGH)
 
-        time.sleep(random.randint(interval_lower, interval_upper))
+        time.sleep(time_to_sleep)
 
         while not hasRun:
             if GPIO.input(38) == GPIO.HIGH:
