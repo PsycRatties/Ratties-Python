@@ -18,9 +18,9 @@ f = open('log.txt','w')
 GPIO.setmode(GPIO.BOARD)
 
 
-def void setup():
+def setup():
     """
-    void function to setup GPIO board for switches.
+    function to setup GPIO board for switches.
     Sets input and output of varius pins
     """
     GPIO.setup(31, GPIO.IN) ## right switch (spst momentary n.o.) 2
@@ -35,7 +35,7 @@ def void setup():
     delay_seconds = delay_seconds * 1000
 
 
-def void triggerRelay():
+def triggerRelay():
     """
     Void Function to triggerRelay to start.
     Will turn on and off Pins 5 & 10 with a delay
@@ -58,7 +58,7 @@ def void triggerRelay():
         GPIO.output(36, GPIO.LOW)
         switchcounter2 = 0
 
-def void loop():
+def loop():
     hasRun = False
     GPIO.output(33, GPIO.LOW)
     GPIO.output(37, GPIO.LOW)
@@ -68,7 +68,7 @@ def void loop():
         f.write("Right Switch Triggered!")
         f.write(datetime.datetime.now())    
         GPIO.output(37, GPIO.HIGH)
-        while !hasRun:
+        while not hasRun:
             if GPIO.input(31) == HIGH:
                 # log that it is triggering relay with the time
                 f.write("Relay Triggered!")
@@ -84,7 +84,7 @@ def void loop():
         f.write("Left Switch Triggered!")
         f.write(datetime.datetime.now()) 
         GPIO.output(33, GPIO.HIGH)
-        while !hasRun:
+        while not hasRun:
             if GPIO.input(38) == HIGH:
                 # log that it is triggering relay with the time
                 f.write("Relay Triggered!")
