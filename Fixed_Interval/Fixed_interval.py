@@ -13,7 +13,7 @@ runs = 0
 file_name = './log' + datetime.datetime.now().strftime('%m/%d/%Y, %H:%M:%S') + '.txt'
 print(file_name)
 os.mknod(file_name)
-f = open(('log' + datetime.datetime.now().strftime('%m/%d/%Y, %H:%M:%S') + '.txt'),'w+')
+f = open(file_name,'w+')
 
 def setup():
     """
