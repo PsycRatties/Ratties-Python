@@ -5,6 +5,8 @@ import time
 import random
 import datetime
 
+f = open('log.txt','w')
+
 def setup():
     """
     function to setup GPIO board for switches.
@@ -28,8 +30,6 @@ def setup():
     #Need to change
     GPIO.setup(10, GPIO.OUT) ## Relay 10
     delay_seconds = delay_seconds * 1000
-
-    f = open('log.txt','w')
 
 def triggerRelay():
     """
