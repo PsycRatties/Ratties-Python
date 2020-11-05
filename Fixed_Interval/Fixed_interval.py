@@ -108,5 +108,3 @@ if __name__== "__main__":
       loop()
 
   f.close()
-  break
-
