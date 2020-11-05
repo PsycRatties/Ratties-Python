@@ -11,6 +11,7 @@ runIterations = 2 ## Amount of time the script should loop
 runs = 0 
 
 file_name = './log' + datetime.datetime.now().strftime('%m/%d/%Y, %H:%M:%S') + '.txt'
+print(file_name)
 os.mknod(file_name)
 f = open(('log' + datetime.datetime.now().strftime('%m/%d/%Y, %H:%M:%S') + '.txt'),'w+')
 
