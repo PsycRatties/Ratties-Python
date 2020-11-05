@@ -1,6 +1,6 @@
 #DONE NEED TO SET PIN 10 TO PROPER GPIO 
 #G2G
-import RPI.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time
 import random
 import datetime
@@ -66,42 +66,43 @@ def loop():
     if (GPIO.input(35) == HIGH):
         # log this button being triggered with the time
         f.write("Right Switch Triggered!")
-        f.write(datetime.datetime.now())    
+        f.write(datetime.datetime.now().strftime('%H%M%S'))    
         GPIO.output(37, GPIO.HIGH)
         while not hasRun:
             if GPIO.input(31) == HIGH:
                 # log that it is triggering relay with the time
                 f.write("Relay Triggered!")
-                f.write(datetime.datetime.now())    
+                f.write(datetime.datetime.now().strftime('%H%M%S'))    
                 hasRun = True
                 triggerRelay()    
                 # log that the program is done with the time
                 f.write("Program Finished!")
-                f.write(datetime.datetime.now())
+                f.write(datetime.datetime.now().strftime('%H%M%S'))
                 break
     elif (GPIO.input(40) == HIGH):
         # log this button being triggered with the time
         f.write("Left Switch Triggered!")
-        f.write(datetime.datetime.now()) 
+        f.write(datetime.datetime.now().strftime('%H%M%S')) 
         GPIO.output(33, GPIO.HIGH)
         while not hasRun:
             if GPIO.input(38) == HIGH:
                 # log that it is triggering relay with the time
                 f.write("Relay Triggered!")
-                f.write(datetime.datetime.now()) 
+                f.write(datetime.datetime.now().strftime('%H%M%S')) 
                 hasRun = True
                 triggerRelay()
                 
                 # log that the program is done with the time
                 f.write("Program Finished!")
-                f.write(datetime.datetime.now())
+                f.write(datetime.datetime.now().strftime('%H%M%S'))
                 break
 
 if __name__== "__main__":
-  while true:
+  while True:
       ## log program start and date and time
+      setup()      
       f.write("Program Started!")
-      f.write(datetime.datetime.now())    
+      f.write(datetime.datetime.now().strftime('%H%M%S'))    
       loop()
       f.close()
       break
