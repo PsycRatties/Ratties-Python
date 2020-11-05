@@ -6,12 +6,11 @@ import random
 import datetime
 
 delay_value = .500 ## how fast the audible click is (higher=longer)
-interval_upper = 30 ## highest time interval that can be selected
+interval_upper = 10 ## highest time interval that can be selected
 interval_lower = 10 ## lowest time interval that can be selected
 timesToClick = 5 ## amount of times the relay should be triggered (default: 10)
 runIterations = 2 ## Amount of time the script should loop
 runs = 0 
-waitForInputTime = 10
 delay_seconds = 10
 
 f = open('log.txt','w')
@@ -72,7 +71,7 @@ def loop():
         f.write(datetime.datetime.now().strftime('%H%M%S'))    
         GPIO.output(37, GPIO.HIGH)
 
-        time.sleep(waitForInputTime)
+        time.sleep(random.randint(interval_lower, interval_upper))
 
         while not hasRun:
             if GPIO.input(31) == GPIO.HIGH:
@@ -91,7 +90,7 @@ def loop():
         f.write(datetime.datetime.now().strftime('%H%M%S')) 
         GPIO.output(33, GPIO.HIGH)
 
-        time.sleep(waitForInputTime)
+        time.sleep(random.randint(interval_lower, interval_upper))
 
         while not hasRun:
             if GPIO.input(38) == GPIO.HIGH:
