@@ -95,6 +95,7 @@ def loop():
                 f.write("Program Finished!")
                 f.write(datetime.datetime.now().strftime('%H%M%S'))
                 break
+    hasRun = False
 
 if __name__== "__main__":
   while True:
