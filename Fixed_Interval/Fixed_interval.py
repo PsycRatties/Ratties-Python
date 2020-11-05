@@ -59,13 +59,13 @@ def loop():
     GPIO.output(33, GPIO.LOW)
     GPIO.output(37, GPIO.LOW)
 
-    if (GPIO.input(35) == HIGH):
+    if (GPIO.input(35) == GPIO.HIGH):
         # log this button being triggered with the time
         f.write("Right Switch Triggered!")
         f.write(datetime.datetime.now().strftime('%H%M%S'))    
         GPIO.output(37, GPIO.HIGH)
         while not hasRun:
-            if GPIO.input(31) == HIGH:
+            if GPIO.input(31) == GPIO.HIGH:
                 # log that it is triggering relay with the time
                 f.write("Relay Triggered!")
                 f.write(datetime.datetime.now().strftime('%H%M%S'))    
@@ -75,13 +75,13 @@ def loop():
                 f.write("Program Finished!")
                 f.write(datetime.datetime.now().strftime('%H%M%S'))
                 break
-    elif (GPIO.input(40) == HIGH):
+    elif (GPIO.input(40) == GPIO.HIGH):
         # log this button being triggered with the time
         f.write("Left Switch Triggered!")
         f.write(datetime.datetime.now().strftime('%H%M%S')) 
         GPIO.output(33, GPIO.HIGH)
         while not hasRun:
-            if GPIO.input(38) == HIGH:
+            if GPIO.input(38) == GPIO.HIGH:
                 # log that it is triggering relay with the time
                 f.write("Relay Triggered!")
                 f.write(datetime.datetime.now().strftime('%H%M%S')) 
