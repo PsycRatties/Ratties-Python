@@ -10,7 +10,7 @@ timesToClick = 5 ## amount of times the relay should be triggered (default: 10)
 runIterations = 2 ## Amount of time the script should loop
 runs = 0 
 
-file_name = os.getcwd() + '/log' + datetime.datetime.now().strftime('%m/%d/%Y, %H:%M:%S') + '.txt'
+file_name = os.getcwd() + '/log' + datetime.datetime.now().strftime('%Y_%m_%d-%I_%M_%S_%p') + '.txt'
 f = open(file_name,'wb+')
 
 def setup():
