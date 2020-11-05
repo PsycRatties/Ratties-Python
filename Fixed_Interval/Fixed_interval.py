@@ -5,24 +5,19 @@ import time
 import random
 import datetime
 
-delay_value = 500 ## how fast the audible click is (higher=longer)
-interval_upper = 30 ## highest time interval that can be selected
-interval_lower = 10 ## lowest time interval that can be selected
-timesToClick = 5 ## amount of times the relay should be triggered (default: 10)
-delay_seconds = 10
-## Open File for Logging 
-f = open('log.txt','w')
-
-
-
-GPIO.setmode(GPIO.BOARD)
-
-
 def setup():
     """
     function to setup GPIO board for switches.
     Sets input and output of varius pins
     """
+    delay_value = 500 ## how fast the audible click is (higher=longer)
+    interval_upper = 30 ## highest time interval that can be selected
+    interval_lower = 10 ## lowest time interval that can be selected
+    timesToClick = 5 ## amount of times the relay should be triggered (default: 10)
+    delay_seconds = 10
+
+    GPIO.setmode(GPIO.BOARD)
+
     GPIO.setup(31, GPIO.IN) ## right switch (spst momentary n.o.) 2
     GPIO.setup(33, GPIO.OUT) ## LED red middle 3
     GPIO.setup(35, GPIO.IN) ## right switch, bottom black (spst) 4
@@ -34,6 +29,7 @@ def setup():
     GPIO.setup(10, GPIO.OUT) ## Relay 10
     delay_seconds = delay_seconds * 1000
 
+    f = open('log.txt','w')
 
 def triggerRelay():
     """
