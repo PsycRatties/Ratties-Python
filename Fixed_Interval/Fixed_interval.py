@@ -5,7 +5,7 @@ import time
 import random
 import datetime
 
-delay_value = 500 ## how fast the audible click is (higher=longer)
+delay_value = .500 ## how fast the audible click is (higher=longer)
 interval_upper = 30 ## highest time interval that can be selected
 interval_lower = 10 ## lowest time interval that can be selected
 timesToClick = 5 ## amount of times the relay should be triggered (default: 10)
