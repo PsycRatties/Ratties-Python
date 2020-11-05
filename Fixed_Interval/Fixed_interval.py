@@ -11,6 +11,7 @@ interval_lower = 10 ## lowest time interval that can be selected
 timesToClick = 5 ## amount of times the relay should be triggered (default: 10)
 runIterations = 2 ## Amount of time the script should loop
 runs = 0 
+waitForInputTime = 10
 delay_seconds = 10
 
 f = open('log.txt','w')
@@ -42,11 +43,11 @@ def triggerRelay():
 
     """
     global timesToClick
-    global delay_value
+    global delay_value, timesToClick
     GPIO.output(37, GPIO.LOW)
     GPIO.output(33, GPIO.LOW)
 
-    for x in range(10):
+    for x in range(timesToClick):
         GPIO.output(36, GPIO.LOW)
         GPIO.output(10, GPIO.LOW)
         GPIO.output(36, GPIO.HIGH)
@@ -60,6 +61,7 @@ def triggerRelay():
         switchcounter2 = 0
 
 def loop():
+    global waitForInputTime
     hasRun = False
     GPIO.output(33, GPIO.LOW)
     GPIO.output(37, GPIO.LOW)
@@ -69,6 +71,9 @@ def loop():
         f.write("Right Switch Triggered!")
         f.write(datetime.datetime.now().strftime('%H%M%S'))    
         GPIO.output(37, GPIO.HIGH)
+
+        time.sleep(waitForInputTime)
+
         while not hasRun:
             if GPIO.input(31) == GPIO.HIGH:
                 # log that it is triggering relay with the time
@@ -85,6 +90,9 @@ def loop():
         f.write("Left Switch Triggered!")
         f.write(datetime.datetime.now().strftime('%H%M%S')) 
         GPIO.output(33, GPIO.HIGH)
+
+        time.sleep(waitForInputTime)
+
         while not hasRun:
             if GPIO.input(38) == GPIO.HIGH:
                 # log that it is triggering relay with the time
