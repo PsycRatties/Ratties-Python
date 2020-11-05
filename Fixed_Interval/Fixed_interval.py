@@ -1,9 +1,7 @@
 #DONE NEED TO SET PIN 10 TO PROPER GPIO 
 #G2G
 import RPi.GPIO as GPIO
-import time
-import random
-import datetime
+import time, random, datetime, os
 
 delay_value = .500 ## how fast the audible click is (higher=longer)
 interval_upper = 10 ## highest time interval that can be selected
@@ -12,6 +10,8 @@ timesToClick = 5 ## amount of times the relay should be triggered (default: 10)
 runIterations = 2 ## Amount of time the script should loop
 runs = 0 
 
+file_name = './log' + datetime.datetime.now().strftime('%m/%d/%Y, %H:%M:%S') + '.txt'
+os.mknod(file_name)
 f = open(('log' + datetime.datetime.now().strftime('%m/%d/%Y, %H:%M:%S') + '.txt'),'w+')
 
 def setup():
