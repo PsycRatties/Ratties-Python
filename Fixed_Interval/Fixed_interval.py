@@ -61,7 +61,7 @@ def loop():
     GPIO.output(33, GPIO.LOW)
     GPIO.output(37, GPIO.LOW)
     time_to_sleep = random.randint(interval_lower, interval_upper)
-    f.write("Delay input time: " + time_to_sleep)
+    f.write("Delay input time: " + str(time_to_sleep))
 
     if (GPIO.input(35) == GPIO.HIGH):
         # log this button being triggered with the time
