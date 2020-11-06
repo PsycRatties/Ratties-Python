@@ -2,15 +2,16 @@
 import RPi.GPIO as GPIO
 import time, random, datetime, os
 
-## Open File for Logging 
-file_name = os.getcwd() + '/log' + datetime.datetime.now().strftime('%Y_%m_%d-%I_%M_%S_%p') + '.txt'
-f = open(file_name,'w')
-
-
 delay_value = 500 ## how fast the audible click is (higher=longer)
 fr = 5
 switchCounter2 = 0
 timesToClick = 10
+runIterations = 2 ## Amount of time the script should loop
+runs = 0
+
+## Open File for Logging 
+file_name = os.getcwd() + '/log' + datetime.datetime.now().strftime('%Y_%m_%d-%I_%M_%S_%p') + '.txt'
+f = open(file_name,'w')
 
 GPIO.setmode(GPIO.BOARD)
 
@@ -61,6 +62,8 @@ def loop():
     GPIO.output(33, GPIO.LOW)
     GPIO.output(37, GPIO.LOW)
 
+    print("starting")
+
     if GPIO.input(35) == GPIO.HIGH:
         print("35 is high")
         # log this button being triggered with the time
@@ -88,3 +91,14 @@ def loop():
     else:
         GPIO.output(33, GPIO.LOW)
         GPIO.output(37, GPIO.LOW)
+
+if __name__== "__main__":
+  ## log program start and date and time
+  setup()
+  f.write("Program Started!")
+  f.write(datetime.datetime.now().strftime('%H%M%S'))
+  while runs < runIterations:
+      runs = runs + 1
+      loop()
+
+  f.close()
