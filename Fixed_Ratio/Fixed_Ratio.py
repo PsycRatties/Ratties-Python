@@ -71,7 +71,7 @@ def loop():
         GPIO.output(33,GPIO.input(40))
         while switchCounter2 < fr:
             switchState7 = GPIO.input(38)
-            if switchState7 != lastswitchstate7 && switchState7 == High:
+            if switchState7 != lastswitchstate7 and switchState7 == GPIO.HIGH:
                 switchCounter2++
             time.sleep(.5)
             lastswitchstate7 = switchState7
