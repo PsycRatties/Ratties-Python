@@ -78,8 +78,7 @@ def loop():
         GPIO.output(37, GPIO.HIGH)
 
         while switchCounter2 < fr:
-            str(GPIO.input(31))
-            str(lastswitchstate2)
+            print(str(GPIO.input(31)) + " | " + str(lastswitchstate2))
             if GPIO.input(31) == GPIO.HIGH and lastswitchstate2 != GPIO.input(31):
                 switchCounter2 = switchCounter2 + 1
                 lastswitchstate2 = GPIO.input(31)
@@ -104,12 +103,12 @@ def loop():
         GPIO.output(37, GPIO.LOW)
 
 if __name__== "__main__":
-  ## log program start and date and time
-  setup()
-  f.write("Program Started!")
-  f.write(datetime.datetime.now().strftime('%H%M%S'))
-  while runs < runIterations:
-      runs = runs + 1
-      loop()
+    ## log program start and date and time
+    setup()
+    f.write("Program Started!")
+    f.write(datetime.datetime.now().strftime('%H%M%S'))
+    while runs < runIterations:
+        runs = runs + 1
+        loop()
 
-  f.close()
+    f.close()
