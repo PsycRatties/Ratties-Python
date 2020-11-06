@@ -73,14 +73,12 @@ def loop():
         GPIO.output(37, GPIO.HIGH)
 
         while switchCounter2 < fr:
-#            print(str(switchCounter2))
             if lastswitchstate2 != GPIO.input(31):
-                print("im here")
                 switchState2 = GPIO.input(31)
                 time.sleep(.50)
                 lastswitchstate2 = switchState2
-                triggerRelay()
-                return
+                break
+        triggerRelay()
     elif GPIO.input(40) == GPIO.HIGH:
         GPIO.output(33,GPIO.input(40))
         while switchCounter2 < fr:
