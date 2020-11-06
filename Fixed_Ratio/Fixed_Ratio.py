@@ -72,7 +72,7 @@ def loop():
         while switchCounter2 < fr:
             switchState7 = GPIO.input(38)
             if switchState7 != lastswitchstate7 and switchState7 == GPIO.HIGH:
-                switchCounter2++
+                switchCounter2 = switchCounter2 + 1
             time.sleep(.5)
             lastswitchstate7 = switchState7
         triggerRelay()
