@@ -1,6 +1,6 @@
 #DONE NEED TO SET PIN 10 TO PROPER GPIO 
 import RPi.GPIO as GPIO
-import time, random, datetime
+import time, random, datetime, os
 
 ## Open File for Logging 
 file_name = os.getcwd() + '/log' + datetime.datetime.now().strftime('%Y_%m_%d-%I_%M_%S_%p') + '.txt'
