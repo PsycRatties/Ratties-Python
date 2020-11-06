@@ -73,6 +73,7 @@ def loop():
         GPIO.output(37, GPIO.HIGH)
 
         while switchCounter2 < fr:
+            print(str(GPIO.input(31)) + " | " + str(lastswitchstate2))
             if GPIO.input(31) == GPIO.HIGH and lastswitchstate2 != GPIO.input(31):
                 switchCounter2 = switchCounter2 + 1
                 lastswitchstate2 = GPIO.input(31)
