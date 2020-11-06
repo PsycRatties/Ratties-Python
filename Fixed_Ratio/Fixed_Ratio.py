@@ -1,11 +1,10 @@
 #DONE NEED TO SET PIN 10 TO PROPER GPIO 
-import RPI.GPIO as GPIO
-import time
-import random
-import datetime
+import RPi.GPIO as GPIO
+import time, random, datetime
 
 ## Open File for Logging 
-f = open('log.txt','w')
+file_name = os.getcwd() + '/log' + datetime.datetime.now().strftime('%Y_%m_%d-%I_%M_%S_%p') + '.txt'
+f = open(file_name,'w')
 
 
 delay_value = 500 ## how fast the audible click is (higher=longer)
@@ -52,8 +51,6 @@ def void triggerRelay():
         GPIO.output(36, GPIO.LOW)
         switchcounter2 = 0
 
-
-
 def void loop():
     switchState2, switchState7 = 0
     lastswitchstate2, lastswitchstate7 = 0
@@ -61,7 +58,7 @@ def void loop():
     GPIO.output(33, GPIO.LOW)
     GPIO.output(37, GPIO.LOW)
 
-    if GPIO.input(35) == HIGH:
+    if GPIO.input(35) == GPIO.HIGH:
         GPIO.output(37, GPIO.input(35))
         while switchCounter2 < fr:
             if lastswitchstate2 != lastswitchstate2:
@@ -70,7 +67,7 @@ def void loop():
                 lastswitchstate2 = switchState2
                 triggerRelay()
                 return
-    elif GPIO.input(40) == HIGH:
+    elif GPIO.input(40) == GPIO.HIGH:
         GPIO.output(33,GPIO.input(40))
         while switchCounter2 < fr:
             switchState7 = GPIO.input(38)
