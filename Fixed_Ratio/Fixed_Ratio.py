@@ -30,6 +30,11 @@ def setup():
     #Need to change
     GPIO.setup(10, GPIO.OUT) ## Relay 10
 
+    GPIO.output(33, GPIO.LOW)
+    GPIO.output(36, GPIO.LOW)
+    GPIO.output(37, GPIO.LOW)
+    GPIO.output(10, GPIO.LOW)
+
 def triggerRelay():
     """
     Void Function to triggerRelay to start.
@@ -47,10 +52,10 @@ def triggerRelay():
         GPIO.output(36, GPIO.HIGH)
         GPIO.output(10, GPIO.HIGH)
         time.sleep(delay_value) ## Note this is is Seconds so might need .500
-        GPIO.output(10, GPIO.LOW)
-        time.sleep(delay_value) ## Note this is is Seconds so might need .500
-        GPIO.output(10, GPIO.HIGH)
-        GPIO.output(10, GPIO.LOW)
+        #GPIO.output(10, GPIO.LOW)
+        #time.sleep(delay_value) ## Note this is is Seconds so might need .500
+        #GPIO.output(10, GPIO.HIGH)
+        #GPIO.output(10, GPIO.LOW)
         GPIO.output(36, GPIO.LOW)
         switchcounter2 = 0
 
@@ -73,7 +78,6 @@ def loop():
         GPIO.output(37, GPIO.HIGH)
 
         while switchCounter2 < fr:
-            print(str(GPIO.input(31)) + " | " + str(lastswitchstate2))
             if GPIO.input(31) == GPIO.HIGH and lastswitchstate2 != GPIO.input(31):
                 switchCounter2 = switchCounter2 + 1
                 lastswitchstate2 = GPIO.input(31)
@@ -81,15 +85,18 @@ def loop():
 
         triggerRelay()
     elif GPIO.input(40) == GPIO.HIGH:
-        GPIO.output(33,GPIO.input(40))
+        # log this button being triggered with the time
+        f.write("Left Switch Triggered!")
+        f.write(datetime.datetime.now().strftime('%H%M%S'))
+        GPIO.output(33, GPIO.HIGH)
+
         while switchCounter2 < fr:
-            switchState7 = GPIO.input(38)
-            if switchState7 != lastswitchstate7 and switchState7 == GPIO.HIGH:
+            if GPIO.input(38) == GPIO.HIGH and lastswitchstate2 != GPIO.input(38):
                 switchCounter2 = switchCounter2 + 1
-            time.sleep(.5)
-            lastswitchstate7 = switchState7
+                lastswitchstate2 = GPIO.input(38)
+            lastswitchstate2 = GPIO.input(38)
+
         triggerRelay()
-        return
     else:
         GPIO.output(33, GPIO.LOW)
         GPIO.output(37, GPIO.LOW)
