@@ -2,7 +2,7 @@
 import RPi.GPIO as GPIO
 import time, random, datetime, os
 
-delay_value = 500 ## how fast the audible click is (higher=longer)
+delay_value = .500 ## how fast the audible click is (higher=longer)
 fr = 5
 switchCounter2 = 0
 timesToClick = 10
