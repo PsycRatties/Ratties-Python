@@ -72,11 +72,9 @@ def loop():
         f.write(datetime.datetime.now().strftime('%H%M%S'))
         GPIO.output(37, GPIO.HIGH)
 
-        print("fr is " + str(fr))
         while switchCounter2 < fr:
 #            print(str(switchCounter2))
-            print(GPIO.input(31))
-            if lastswitchstate2 != lastswitchstate2:
+            if lastswitchstate2 != GPIO.input(31):
                 print("im here")
                 switchState2 = GPIO.input(31)
                 time.sleep(.50)
