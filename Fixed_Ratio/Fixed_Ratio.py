@@ -56,8 +56,10 @@ def triggerRelay():
 
 def loop():
     global fr, switchCounter2
-    switchState2, switchState7 = 0
-    lastswitchstate2, lastswitchstate7 = 0
+    switchState2 = 0
+    switchState7 = 0
+    lastswitchstate2 = 0
+    lastswitchstate7 = 0
 
     GPIO.output(33, GPIO.LOW)
     GPIO.output(37, GPIO.LOW)
