@@ -67,13 +67,14 @@ def loop():
     print("starting")
 
     if GPIO.input(35) == GPIO.HIGH:
-        print("35 is high")
         # log this button being triggered with the time
         f.write("Right Switch Triggered!")
         f.write(datetime.datetime.now().strftime('%H%M%S'))
         GPIO.output(37, GPIO.HIGH)
 
+        print("fr is " + fr)
         while switchCounter2 < fr:
+            print(switchCounter2)
             if lastswitchstate2 != lastswitchstate2:
                 switchState2 = GPIO.input(31)
                 time.sleep(.50)
