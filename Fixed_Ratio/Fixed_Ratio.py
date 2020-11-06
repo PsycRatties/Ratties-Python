@@ -52,7 +52,7 @@ def triggerRelay():
         GPIO.output(36, GPIO.HIGH)
         GPIO.output(10, GPIO.HIGH)
         time.sleep(delay_value) ## Note this is is Seconds so might need .500
-        #GPIO.output(10, GPIO.LOW)
+        GPIO.output(10, GPIO.LOW)
         #time.sleep(delay_value) ## Note this is is Seconds so might need .500
         #GPIO.output(10, GPIO.HIGH)
         #GPIO.output(10, GPIO.LOW)
@@ -78,6 +78,7 @@ def loop():
         GPIO.output(37, GPIO.HIGH)
 
         while switchCounter2 < fr:
+            print(str(GPIO.input(31)) + " | " + str(lastswitchstate2))
             if GPIO.input(31) == GPIO.HIGH and lastswitchstate2 != GPIO.input(31):
                 switchCounter2 = switchCounter2 + 1
                 lastswitchstate2 = GPIO.input(31)
