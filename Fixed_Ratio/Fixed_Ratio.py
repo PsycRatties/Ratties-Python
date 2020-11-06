@@ -10,6 +10,7 @@ f = open(file_name,'w')
 delay_value = 500 ## how fast the audible click is (higher=longer)
 fr = 5
 switchCounter2 = 0
+timesToClick = 10
 
 GPIO.setmode(GPIO.BOARD)
 
@@ -35,23 +36,25 @@ def triggerRelay():
     Uses 'delay_value', 'timesToClick'
 
     """
+    global delay_value, timesToClick
     GPIO.output(37, GPIO.LOW)
     GPIO.output(33, GPIO.LOW)
 
-    for x in 10:
+    for x in range(timesToClick):
         GPIO.output(36, GPIO.LOW)
         GPIO.output(10, GPIO.LOW)
         GPIO.output(36, GPIO.HIGH)
         GPIO.output(10, GPIO.HIGH)
-        time.sleep(delay_value) ## Note this is Seconds so might need .500
+        time.sleep(delay_value) ## Note this is is Seconds so might need .500
         GPIO.output(10, GPIO.LOW)
-        time.sleep(delay_value) ## Note this is Seconds so might need .500
+        time.sleep(delay_value) ## Note this is is Seconds so might need .500
         GPIO.output(10, GPIO.HIGH)
         GPIO.output(10, GPIO.LOW)
         GPIO.output(36, GPIO.LOW)
         switchcounter2 = 0
 
 def loop():
+    global fr, switchCounter2
     switchState2, switchState7 = 0
     lastswitchstate2, lastswitchstate7 = 0
 
