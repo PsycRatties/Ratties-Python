@@ -74,8 +74,9 @@ def loop():
 
         print("fr is " + str(fr))
         while switchCounter2 < fr:
-            print(str(switchCounter2))
+#            print(str(switchCounter2))
             if lastswitchstate2 != lastswitchstate2:
+                print("im here")
                 switchState2 = GPIO.input(31)
                 time.sleep(.50)
                 lastswitchstate2 = switchState2
