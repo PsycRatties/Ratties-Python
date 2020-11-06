@@ -13,7 +13,7 @@ switchCounter2 = 0
 
 GPIO.setmode(GPIO.BOARD)
 
-def void setup():
+def setup():
     """
     void function to setup GPIO board for switches.
     Sets input and output of varius pins
@@ -28,7 +28,7 @@ def void setup():
     #Need to change
     GPIO.setup(10, GPIO.OUT) ## Relay 10
 
-def void triggerRelay():
+def triggerRelay():
     """
     Void Function to triggerRelay to start.
     Will turn on and off Pins 5 & 10 with a delay
@@ -51,7 +51,7 @@ def void triggerRelay():
         GPIO.output(36, GPIO.LOW)
         switchcounter2 = 0
 
-def void loop():
+def loop():
     switchState2, switchState7 = 0
     lastswitchstate2, lastswitchstate7 = 0
 
