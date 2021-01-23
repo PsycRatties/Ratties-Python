@@ -31,7 +31,7 @@ def setup():
     #Need to change
     GPIO.setup(10, GPIO.OUT) ## Relay 10
 
-    GPIO.output(7, GPIO.LOW)
+    GPIO.output(7, GPIO.HIGH)
     GPIO.output(33, GPIO.LOW)
     GPIO.output(36, GPIO.LOW)
     GPIO.output(37, GPIO.LOW)
@@ -51,7 +51,7 @@ def triggerRelay():
 
     f.write("Relay Triggered!")
     f.write(datetime.datetime.now().strftime('%H%M%S')) 
-    GPIO.output(7, GPIO.HIGH)
+    
     while GPIO.input(31) == GPIO.LOW:
         for x in range(timesToClick):
             GPIO.output(36, GPIO.LOW)
@@ -65,7 +65,6 @@ def triggerRelay():
             GPIO.output(10, GPIO.LOW)
             GPIO.output(36, GPIO.LOW)
             switchCounter2 = 0
-    GPIO.output(7, GPIO.LOW)
 
 def loop():
     global fr, switchCounter2
@@ -121,5 +120,5 @@ if __name__== "__main__":
     while runIterations > runs:
         loop()
         runs = runs + 1
-
+    GPIO.output(7, GPIO.LOW)
     f.close()
