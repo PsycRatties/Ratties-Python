@@ -69,7 +69,7 @@ def triggerRelay():
         GPIO.output(36, GPIO.LOW)
         switchCounter2 = 0
 
-start_time = datetime.now()
+start_time = datetime.datetime.now()
 def time_elapsed(delay_time, now_time):
     print(now_time-start_time)
     return True
