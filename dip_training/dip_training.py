@@ -81,7 +81,7 @@ def time_elapsed(delay_time):
 def loop():
     reinforced = False
     delay_seconds = random.randint(interval_lower, interval_upper) * 1000
-    print("DELAY SECONDS: " + delay_seconds)
+    print("DELAY SECONDS: ", delay_seconds)
     # turn off both LED's on start of script
     GPIO.output(33, GPIO.LOW)
     GPIO.output(37, GPIO.LOW)
