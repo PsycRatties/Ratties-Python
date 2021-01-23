@@ -8,7 +8,7 @@ switchcounter2 = 0
 ratio_upper = 10
 ratio_lower = 2
 runIterations = 2 ## Amount of time the script should loop
-runs = 0 
+runs = 0
 
 file_name = os.getcwd() + '/log' + datetime.datetime.now().strftime('%Y_%m_%d-%I_%M_%S_%p') + '.txt'
 f = open(file_name,'w')
@@ -108,12 +108,12 @@ def loop():
         GPIO.output(37, GPIO.LOW)
 
 if __name__== "__main__":
-  ## log program start and date and time
-  setup()
-  f.write("Program Started!")
-  f.write(datetime.datetime.now().strftime('%H%M%S'))
-  while runs < runIterations:
-      runs = runs + 1
-      loop()
+    ## log program start and date and time
+    setup()
+    f.write("Program Started!")
+    f.write(datetime.datetime.now().strftime('%H%M%S'))
+    while runIterations > runs:
+        loop()
+        runs = runs + 1
 
-  f.close()
+    f.close()
