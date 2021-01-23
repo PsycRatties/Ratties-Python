@@ -24,6 +24,7 @@ def setup():
     function to setup GPIO board for switches.
     Sets input and output of varius pins
     """
+    global sleep_times
     GPIO.setmode(GPIO.BOARD)
 
     GPIO.setup(31, GPIO.IN)  # right switch (spst momentary n.o.) 2
@@ -40,6 +41,7 @@ def setup():
         with open('time.csv', newline='') as file:
             reader = csv.reader(file)
             sleep_times = list(reader)
+        print(sleep_times)
     except:
         sys.exit("COULD NOT FILD time.csv")
 
@@ -127,7 +129,6 @@ if __name__ == "__main__":
     setup()
     f.write("Program Started!")
     f.write(datetime.datetime.now().strftime('%H%M%S'))
-    print(sleep_times)
     while len(sleep_times) > runs:
         loop()
         runs = runs + 1
