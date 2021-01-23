@@ -4,6 +4,8 @@ import time
 import random
 import datetime
 import os
+import csv
+import sys
 
 delay_value = .500  # how fast the audible click is (higher=longer)
 timesToClick = 5  # amount of times the relay should be triggered (default: 10)
@@ -17,7 +19,7 @@ file_name = os.getcwd() + '/log' + \
     datetime.datetime.now().strftime('%Y_%m_%d-%I_%M_%S_%p') + '.txt'
 f = open(file_name, 'w')
 
-
+vr_responses = list()
 def setup():
     """
     function to setup GPIO board for switches.
@@ -39,6 +41,14 @@ def setup():
     GPIO.output(36, GPIO.LOW)
     GPIO.output(37, GPIO.LOW)
     GPIO.output(10, GPIO.LOW)
+
+    try:
+        with open('responses.csv', newline='') as file:
+            reader = csv.reader(file)
+            vr_responses = list(reader)
+        print(vr_responses)
+    except:
+        sys.exit("COULD NOT FILD responses.csv")
 
 
 def triggerRelay():
@@ -69,8 +79,9 @@ def triggerRelay():
         GPIO.output(36, GPIO.LOW)
         switchcounter2 = 0
 
-
+vr_pos = 0
 def loop():
+    global vr_pos, vr_responses
     global switchcounter2
     switchState2 = 0
     switchState7 = 0
@@ -80,7 +91,7 @@ def loop():
     GPIO.output(33, GPIO.LOW)
     GPIO.output(37, GPIO.LOW)
 
-    vr = random.randint(ratio_lower, ratio_upper)
+    vr = int(vr_responses[vr_pos][0])
     print("PROGRAM PICKED: ", vr, " CLICKS")
     f.write("PROGRAM PICKED: %s CLICKS" % vr)
     f.write(datetime.datetime.now().strftime('%H%M%S'))
@@ -120,14 +131,14 @@ def loop():
     else:
         GPIO.output(33, GPIO.LOW)
         GPIO.output(37, GPIO.LOW)
-
+    vr_pos = vr_pos + 1
 
 if __name__ == "__main__":
     # log program start and date and time
     setup()
     f.write("Program Started!")
     f.write(datetime.datetime.now().strftime('%H%M%S'))
-    while runIterations > runs:
+    while len(vr_responses) > runs:
         loop()
         runs = runs + 1
 
