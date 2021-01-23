@@ -109,7 +109,7 @@ if __name__== "__main__":
     setup()
     f.write("Program Started!")
     f.write(datetime.datetime.now().strftime('%H%M%S'))
-    while runIterations < runs:
+    while runIterations > runs:
         loop()
         runs = runs + 1
 
