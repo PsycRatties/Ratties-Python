@@ -53,17 +53,25 @@ def triggerRelay():
     f.write(datetime.datetime.now().strftime('%H%M%S')) 
     
     laser_state = GPIO.LOW
+    max_time = 0.500
+    
     while laser_state == GPIO.LOW:
         if GPIO.input(31) == GPIO.HIGH: laser_state = GPIO.HIGH
         GPIO.output(36, GPIO.LOW)
         GPIO.output(10, GPIO.LOW)
         GPIO.output(36, GPIO.HIGH)
         GPIO.output(10, GPIO.HIGH)
+        start_time = time.time()
+        while (time.time() - start_time) < max_time:
+            if GPIO.input(31) == GPIO.HIGH: laser_state = GPIO.HIGH
         GPIO.output(10, GPIO.LOW)
+        start_time = time.time()
+        while (time.time() - start_time) < max_time:
+            if GPIO.input(31) == GPIO.HIGH: laser_state = GPIO.HIGH
         GPIO.output(10, GPIO.HIGH)
         GPIO.output(10, GPIO.LOW)
         GPIO.output(36, GPIO.LOW)
-        if GPIO.input(31) == GPIO.HIGH: laser_state = GPIO.HIGH
+        laser_state = GPIO.input(31)
     switchCounter2 = 0
 
 def loop():
