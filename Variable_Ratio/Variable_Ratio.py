@@ -42,6 +42,9 @@ def triggerRelay():
     GPIO.output(37, GPIO.LOW)
     GPIO.output(33, GPIO.LOW)
 
+    f.write("Relay Triggered!")
+    f.write(datetime.datetime.now().strftime('%H%M%S')) 
+
     for x in range(timesToClick):
         GPIO.output(36, GPIO.LOW)
         GPIO.output(10, GPIO.LOW)
@@ -75,7 +78,7 @@ def loop():
 
         while switchcounter2 < vr:
             switchState2 = GPIO.input(31)
-            print(str(GPIO.input(31)) + " | " + str(lastswitchstate2))
+            #print(str(GPIO.input(31)) + " | " + str(lastswitchstate2))
             if GPIO.input(31) == GPIO.HIGH and lastswitchstate2 != GPIO.input(31):
                 f.write("Switch pressed")
                 f.write(datetime.datetime.now().strftime('%H%M%S'))
@@ -92,26 +95,25 @@ def loop():
         GPIO.output(33, GPIO.HIGH)
 
         while switchcounter2 < vr:
-            print(str(GPIO.input(38)) + " | " + str(lastswitchstate2))
+            #print(str(GPIO.input(38)) + " | " + str(lastswitchstate2))
             if GPIO.input(38) == GPIO.HIGH and lastswitchstate2 != GPIO.input(38):
                 f.write("Switch pressed")
                 f.write(datetime.datetime.now().strftime('%H%M%S'))
                 switchcounter2 = switchcounter2 + 1
                 lastswitchstate2 = GPIO.input(38)
             lastswitchstate2 = GPIO.input(38)
-
         triggerRelay()
     else:
         GPIO.output(33, GPIO.LOW)
         GPIO.output(37, GPIO.LOW)
 
 if __name__== "__main__":
-    ## log program start and date and time
-    setup()
-    f.write("Program Started!")
-    f.write(datetime.datetime.now().strftime('%H%M%S'))
-    while runs < runIterations:
-        runs = runs + 1
-        loop()
+  ## log program start and date and time
+  setup()
+  f.write("Program Started!")
+  f.write(datetime.datetime.now().strftime('%H%M%S'))
+  while runs < runIterations:
+      runs = runs + 1
+      loop()
 
-    f.close()
+  f.close()
