@@ -13,13 +13,13 @@ runs = 0
 file_name = os.getcwd() + '/log' + datetime.datetime.now().strftime('%Y_%m_%d-%I_%M_%S_%p') + '.txt'
 f = open(file_name,'w')
 
-GPIO.setmode(GPIO.BOARD)
-
 def setup():
     """
-    void function to setup GPIO board for switches.
+    function to setup GPIO board for switches.
     Sets input and output of varius pins
     """
+    GPIO.setmode(GPIO.BOARD)
+
     GPIO.setup(31, GPIO.IN) ## right switch (spst momentary n.o.) 2
     GPIO.setup(33, GPIO.OUT) ## LED red middle 3
     GPIO.setup(35, GPIO.IN) ## right switch, bottom black (spst) 4
@@ -42,7 +42,7 @@ def triggerRelay():
     Uses 'delay_value', 'timesToClick'
 
     """
-    global timesToClick
+    global timesToClick, switchcounter2
     global delay_value, timesToClick
     GPIO.output(37, GPIO.LOW)
     GPIO.output(33, GPIO.LOW)
@@ -109,8 +109,8 @@ if __name__== "__main__":
     setup()
     f.write("Program Started!")
     f.write(datetime.datetime.now().strftime('%H%M%S'))
-    while runs < runIterations:
-        runs = runs + 1
+    while runIterations < runs:
         loop()
+        runs = runs + 1
 
     f.close()
