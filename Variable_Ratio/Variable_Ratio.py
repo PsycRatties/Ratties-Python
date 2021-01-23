@@ -7,6 +7,8 @@ timesToClick = 5 ## amount of times the relay should be triggered (default: 10)
 switchcounter2 = 0
 ratio_upper = 10
 ratio_lower = 2
+runIterations = 2 ## Amount of time the script should loop
+runs = 0 
 
 file_name = os.getcwd() + '/log' + datetime.datetime.now().strftime('%Y_%m_%d-%I_%M_%S_%p') + '.txt'
 f = open(file_name,'w')
@@ -89,12 +91,12 @@ def loop():
         f.write(datetime.datetime.now().strftime('%H%M%S'))
         GPIO.output(33, GPIO.HIGH)
 
-        while switchCounter2 < fr:
+        while switchcounter2 < fr:
             print(str(GPIO.input(38)) + " | " + str(lastswitchstate2))
             if GPIO.input(38) == GPIO.HIGH and lastswitchstate2 != GPIO.input(38):
                 f.write("Switch pressed")
                 f.write(datetime.datetime.now().strftime('%H%M%S'))
-                switchCounter2 = switchCounter2 + 1
+                switchcounter2 = switchcounter2 + 1
                 lastswitchstate2 = GPIO.input(38)
             lastswitchstate2 = GPIO.input(38)
 
@@ -104,12 +106,12 @@ def loop():
         GPIO.output(37, GPIO.LOW)
 
 if __name__== "__main__":
-  ## log program start and date and time
-  setup()
-  f.write("Program Started!")
-  f.write(datetime.datetime.now().strftime('%H%M%S'))
-  while runs < runIterations:
-      runs = runs + 1
-      loop()
+    ## log program start and date and time
+    setup()
+    f.write("Program Started!")
+    f.write(datetime.datetime.now().strftime('%H%M%S'))
+    while runs < runIterations:
+        runs = runs + 1
+        loop()
 
-  f.close()
+    f.close()
