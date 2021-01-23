@@ -72,8 +72,10 @@ def triggerRelay():
 
 start_time = time.time()
 def time_elapsed(delay_time):
-    status = time.time()-start_time >= delay_time
-    print("SECONDS PASSED STATUS: ", status)
+    diff = time.time()-start_time
+    status = diff >= delay_time
+    print("Diff: ", diff, "   Status: ", status)
+    #print("SECONDS PASSED STATUS: ", status)
     if status:
         return True
     return False
