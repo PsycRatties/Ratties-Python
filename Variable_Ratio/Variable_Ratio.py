@@ -7,7 +7,7 @@ import os
 
 delay_value = .500  # how fast the audible click is (higher=longer)
 timesToClick = 5  # amount of times the relay should be triggered (default: 10)
-switchcounter2 = 0
+switchCounter2 = 0
 ratio_upper = 10
 ratio_lower = 2
 runIterations = 2  # Amount of time the script should loop
@@ -48,7 +48,7 @@ def triggerRelay():
     Uses 'delay_value', 'timesToClick'
 
     """
-    global timesToClick, switchcounter2
+    global timesToClick, switchCounter2
     global delay_value, timesToClick
     GPIO.output(37, GPIO.LOW)
     GPIO.output(33, GPIO.LOW)
@@ -67,11 +67,11 @@ def triggerRelay():
         GPIO.output(10, GPIO.HIGH)
         GPIO.output(10, GPIO.LOW)
         GPIO.output(36, GPIO.LOW)
-        switchcounter2 = 0
+        switchCounter2 = 0
 
 
 def loop():
-    global switchcounter2
+    global switchCounter2
     switchState2 = 0
     switchState7 = 0
     lastswitchstate2 = 0
@@ -91,12 +91,12 @@ def loop():
         f.write(datetime.datetime.now().strftime('%H%M%S'))
         GPIO.output(37, GPIO.HIGH)
 
-        while switchcounter2 < vr:
+        while switchCounter2 < vr:
             print(str(GPIO.input(31)) + " | " + str(lastswitchstate2))
             if GPIO.input(31) == GPIO.HIGH and lastswitchstate2 != GPIO.input(31):
                 f.write("Switch pressed")
                 f.write(datetime.datetime.now().strftime('%H%M%S'))
-                switchcounter2 = switchcounter2 + 1
+                switchCounter2 = switchCounter2 + 1
                 lastswitchstate2 = GPIO.input(31)
             lastswitchstate2 = GPIO.input(31)
             # time.sleep(.50)
@@ -108,12 +108,12 @@ def loop():
         f.write(datetime.datetime.now().strftime('%H%M%S'))
         GPIO.output(33, GPIO.HIGH)
 
-        while switchcounter2 < vr:
+        while switchCounter2 < vr:
             print(str(GPIO.input(38)) + " | " + str(lastswitchstate2))
             if GPIO.input(38) == GPIO.HIGH and lastswitchstate2 != GPIO.input(38):
                 f.write("Switch pressed")
                 f.write(datetime.datetime.now().strftime('%H%M%S'))
-                switchcounter2 = switchcounter2 + 1
+                switchCounter2 = switchCounter2 + 1
                 lastswitchstate2 = GPIO.input(38)
             lastswitchstate2 = GPIO.input(38)
         triggerRelay()

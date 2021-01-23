@@ -69,7 +69,7 @@ def triggerRelay():
         GPIO.output(10, GPIO.HIGH)
         GPIO.output(10, GPIO.LOW)
         GPIO.output(36, GPIO.LOW)
-        switchcounter2 = 0
+        switchCounter2 = 0
 
 sleep_pos = 0
 def loop():
