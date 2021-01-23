@@ -52,7 +52,8 @@ def triggerRelay():
     f.write("Relay Triggered!")
     f.write(datetime.datetime.now().strftime('%H%M%S')) 
     
-    while GPIO.input(31) == GPIO.LOW:
+    laser_state = GPIO.LOW
+    while laser_state:
         GPIO.output(36, GPIO.LOW)
         GPIO.output(10, GPIO.LOW)
         GPIO.output(36, GPIO.HIGH)
@@ -63,6 +64,7 @@ def triggerRelay():
         GPIO.output(10, GPIO.HIGH)
         GPIO.output(10, GPIO.LOW)
         GPIO.output(36, GPIO.LOW)
+        laser_state = GPIO.input(31)
     switchCounter2 = 0
 
 def loop():
