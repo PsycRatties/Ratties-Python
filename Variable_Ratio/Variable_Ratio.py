@@ -5,7 +5,7 @@ import random
 import datetime
 import os
 
-delay_value = 500  # how fast the audible click is (higher=longer)
+delay_value = .500  # how fast the audible click is (higher=longer)
 timesToClick = 5  # amount of times the relay should be triggered (default: 10)
 switchcounter2 = 0
 ratio_upper = 10
