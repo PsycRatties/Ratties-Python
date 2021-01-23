@@ -53,18 +53,17 @@ def triggerRelay():
     f.write(datetime.datetime.now().strftime('%H%M%S')) 
     
     while GPIO.input(31) == GPIO.LOW:
-        for x in range(timesToClick):
-            GPIO.output(36, GPIO.LOW)
-            GPIO.output(10, GPIO.LOW)
-            GPIO.output(36, GPIO.HIGH)
-            GPIO.output(10, GPIO.HIGH)
-            time.sleep(delay_value) ## Note this is is Seconds so might need .500
-            GPIO.output(10, GPIO.LOW)
-            time.sleep(delay_value) ## Note this is is Seconds so might need .500
-            GPIO.output(10, GPIO.HIGH)
-            GPIO.output(10, GPIO.LOW)
-            GPIO.output(36, GPIO.LOW)
-            switchCounter2 = 0
+        GPIO.output(36, GPIO.LOW)
+        GPIO.output(10, GPIO.LOW)
+        GPIO.output(36, GPIO.HIGH)
+        GPIO.output(10, GPIO.HIGH)
+        time.sleep(delay_value) ## Note this is is Seconds so might need .500
+        GPIO.output(10, GPIO.LOW)
+        time.sleep(delay_value) ## Note this is is Seconds so might need .500
+        GPIO.output(10, GPIO.HIGH)
+        GPIO.output(10, GPIO.LOW)
+        GPIO.output(36, GPIO.LOW)
+    switchCounter2 = 0
 
 def loop():
     global fr, switchCounter2
