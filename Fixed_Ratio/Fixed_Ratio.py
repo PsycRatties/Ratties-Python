@@ -13,13 +13,13 @@ runs = 0
 file_name = os.getcwd() + '/log' + datetime.datetime.now().strftime('%Y_%m_%d-%I_%M_%S_%p') + '.txt'
 f = open(file_name,'w')
 
+GPIO.setmode(GPIO.BOARD)
+
 def setup():
     """
-    function to setup GPIO board for switches.
+    void function to setup GPIO board for switches.
     Sets input and output of varius pins
     """
-    GPIO.setmode(GPIO.BOARD)
-
     GPIO.setup(31, GPIO.IN) ## right switch (spst momentary n.o.) 2
     GPIO.setup(33, GPIO.OUT) ## LED red middle 3
     GPIO.setup(35, GPIO.IN) ## right switch, bottom black (spst) 4
