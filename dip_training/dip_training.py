@@ -69,9 +69,10 @@ def triggerRelay():
         GPIO.output(36, GPIO.LOW)
         switchCounter2 = 0
 
-start_time = datetime.datetime.now()
-def time_elapsed(delay_time, now_time):
-    print(now_time-start_time)
+
+start_time = time.time()
+def time_elapsed(delay_time):
+    print(time.time()-start_time)
     return True
     
 def loop():
@@ -81,9 +82,9 @@ def loop():
     GPIO.output(37, GPIO.LOW)
 
     while True:
-        if (GPIO.input(40) == GPIO.HIGH and GPIO.input(38) == GPIO.HIGH) or time_elapsed(delay_seconds, datetime.datetime.now()):
+        if (GPIO.input(40) == GPIO.HIGH and GPIO.input(38) == GPIO.HIGH) or time_elapsed(delay_seconds):
             triggerRelay()
-        elif (GPIO.input(35) == GPIO.HIGH and GPIO.input(31) == GPIO.HIGH) or time_elapsed(delay_seconds, datetime.datetime.now()):
+        elif (GPIO.input(35) == GPIO.HIGH and GPIO.input(31) == GPIO.HIGH) or time_elapsed(delay_seconds):
             triggerRelay()
         delay_seconds = random.randint(interval_lower, interval_upper) * 1000
 
@@ -93,7 +94,7 @@ if __name__ == "__main__":
     f.write("Program Started!")
     f.write(datetime.datetime.now().strftime('%H%M%S'))
     while runIterations > runs:
-        start_time = datetime.datetime.now()
+        start_time = time.time()
         loop()
         runs = runs + 1
 
