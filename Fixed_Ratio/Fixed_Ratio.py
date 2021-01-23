@@ -62,15 +62,10 @@ def triggerRelay():
 
 def loop():
     global fr, switchCounter2
-    # switchState2 = 0
-    # switchState7 = 0
     lastswitchstate2 = 0
-    # lastswitchstate7 = 0
 
     GPIO.output(33, GPIO.LOW)
     GPIO.output(37, GPIO.LOW)
-
-    print("starting")
 
     if GPIO.input(35) == GPIO.HIGH:
         # log this button being triggered with the time
@@ -79,8 +74,10 @@ def loop():
         GPIO.output(37, GPIO.HIGH)
 
         while switchCounter2 < fr:
-            print(str(GPIO.input(31)) + " | " + str(lastswitchstate2))
+            #print(str(GPIO.input(31)) + " | " + str(lastswitchstate2))
             if GPIO.input(31) == GPIO.HIGH and lastswitchstate2 != GPIO.input(31):
+                f.write("Switch pressed")
+                f.write(datetime.datetime.now().strftime('%H%M%S'))
                 switchCounter2 = switchCounter2 + 1
                 lastswitchstate2 = GPIO.input(31)
             lastswitchstate2 = GPIO.input(31)
@@ -93,8 +90,10 @@ def loop():
         GPIO.output(33, GPIO.HIGH)
 
         while switchCounter2 < fr:
-            print(str(GPIO.input(38)) + " | " + str(lastswitchstate2))
+            #print(str(GPIO.input(38)) + " | " + str(lastswitchstate2))
             if GPIO.input(38) == GPIO.HIGH and lastswitchstate2 != GPIO.input(38):
+                f.write("Switch pressed")
+                f.write(datetime.datetime.now().strftime('%H%M%S'))
                 switchCounter2 = switchCounter2 + 1
                 lastswitchstate2 = GPIO.input(38)
             lastswitchstate2 = GPIO.input(38)
@@ -103,13 +102,16 @@ def loop():
     else:
         GPIO.output(33, GPIO.LOW)
         GPIO.output(37, GPIO.LOW)
+    
+    f.write("Program Finished!")
+    f.write(datetime.datetime.now().strftime('%H%M%S'))
 
 if __name__== "__main__":
     ## log program start and date and time
     setup()
     f.write("Program Started!")
     f.write(datetime.datetime.now().strftime('%H%M%S'))
-    while runIterations < runs:
+    while runIterations > runs:
         loop()
         runs = runs + 1
 
