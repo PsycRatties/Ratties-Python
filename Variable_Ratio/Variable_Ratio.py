@@ -81,6 +81,7 @@ def loop():
     GPIO.output(37, GPIO.LOW)
 
     vr = random.randint(ratio_lower, ratio_upper)
+    print("PROGRAM PICKED: ", vr, " CLICKS")
 
     if GPIO.input(35) == GPIO.HIGH:
         # log this button being triggered with the time
