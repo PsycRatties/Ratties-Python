@@ -48,7 +48,6 @@ def setup():
         with open('responses.csv', newline='') as file:
             reader = csv.reader(file)
             vr_responses = list(reader)
-        print(vr_responses)
     except:
         sys.exit("COULD NOT FIND responses.csv")
 
