@@ -72,22 +72,28 @@ def triggerRelay():
 
 start_time = time.time()
 def time_elapsed(delay_time):
-    if time.time()-start_time >= delay_time:
+    status = time.time()-start_time >= delay_time
+    print("SECONDS PASSED STATUS: ", status)
+    if status:
         return True
     return False
 
 def loop():
     reinforced = False
     delay_seconds = random.randint(interval_lower, interval_upper) * 1000
+    print("DELAY SECONDS: " + delay_seconds)
     # turn off both LED's on start of script
     GPIO.output(33, GPIO.LOW)
     GPIO.output(37, GPIO.LOW)
 
     while not reinforced:
-        if (GPIO.input(40) == GPIO.HIGH and GPIO.input(38) == GPIO.HIGH) or time_elapsed(delay_seconds):
+        if time_elapsed(delay_seconds):
             triggerRelay()
             reinforced = True
-        elif (GPIO.input(35) == GPIO.HIGH and GPIO.input(31) == GPIO.HIGH) or time_elapsed(delay_seconds):
+        elif GPIO.input(40) == GPIO.HIGH and GPIO.input(38) == GPIO.HIGH:
+            triggerRelay()
+            reinforced = True
+        elif GPIO.input(35) == GPIO.HIGH and GPIO.input(31) == GPIO.HIGH:
             triggerRelay()
             reinforced = True
 
