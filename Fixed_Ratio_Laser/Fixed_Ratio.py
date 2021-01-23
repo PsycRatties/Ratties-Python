@@ -63,11 +63,7 @@ def triggerRelay():
         if GPIO.input(31) == GPIO.HIGH: laser_state = GPIO.HIGH
         GPIO.output(10, GPIO.HIGH)
         if GPIO.input(31) == GPIO.HIGH: laser_state = GPIO.HIGH
-        time.sleep(delay_value) ## Note this is is Seconds so might need .500
-        if GPIO.input(31) == GPIO.HIGH: laser_state = GPIO.HIGH
         GPIO.output(10, GPIO.LOW)
-        if GPIO.input(31) == GPIO.HIGH: laser_state = GPIO.HIGH
-        time.sleep(delay_value) ## Note this is is Seconds so might need .500
         if GPIO.input(31) == GPIO.HIGH: laser_state = GPIO.HIGH
         GPIO.output(10, GPIO.HIGH)
         if GPIO.input(31) == GPIO.HIGH: laser_state = GPIO.HIGH
