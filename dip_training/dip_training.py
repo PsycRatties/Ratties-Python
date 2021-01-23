@@ -88,9 +88,13 @@ def loop():
             triggerRelay()
             reinforced = True
         elif GPIO.input(40) == GPIO.HIGH and GPIO.input(38) == GPIO.HIGH:
+            f.write("Right Switch Triggered!")
+            f.write(datetime.datetime.now().strftime('%H%M%S'))
             triggerRelay()
             reinforced = True
         elif GPIO.input(35) == GPIO.HIGH and GPIO.input(31) == GPIO.HIGH:
+            f.write("Left Switch Triggered!")
+            f.write(datetime.datetime.now().strftime('%H%M%S'))
             triggerRelay()
             reinforced = True
 
