@@ -123,7 +123,6 @@ def loop():
 
 
 if __name__ == "__main__":
-    global sleep_times
     # log program start and date and time
     setup()
     f.write("Program Started!")
