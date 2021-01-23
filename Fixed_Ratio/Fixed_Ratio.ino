@@ -6,7 +6,7 @@
 
 int delay_value = 500; // how fast the audible click is (higher=longer)
 int fr = 5; // amount of button presses to start the relay
-int switchcounter2 = 0; // counter for small button presses
+int switchCounter2 = 0; // counter for small button presses
 
 void setup() {
   pinMode(2, INPUT); // right switch (spst momentary n.o.)
@@ -34,7 +34,7 @@ void triggerRelay() {
     digitalWrite(10, HIGH);
     digitalWrite(10, LOW);
     digitalWrite(5, LOW);
-    switchcounter2 = 0;
+    switchCounter2 = 0;
   }
 }
 
@@ -49,11 +49,11 @@ void loop() {
     do {
       switchState2 = digitalRead(2); //Read the state of the button
       if ((switchState2 != lastswitchstate2) and (switchState2 == HIGH)) {
-        switchcounter2++;  //Increment the counter
+        switchCounter2++;  //Increment the counter
       }
       delay(50); //Delay for 50ms
       lastswitchstate2 = switchState2; //store last state (for reset)
-    } while (switchcounter2 < fr); //Run this do, while the counter is LESS THAN the fixed ratio
+    } while (switchCounter2 < fr); //Run this do, while the counter is LESS THAN the fixed ratio
 
     triggerRelay();
     return;
@@ -63,11 +63,11 @@ void loop() {
     do {
       switchState7 = digitalRead(7); //Read the state of the button
       if ((switchState7 != lastswitchstate7) and (switchState7 == HIGH)) {
-        switchcounter2++;  //Increment the counter
+        switchCounter2++;  //Increment the counter
       }
       delay(50); //Delay for 50ms
       lastswitchstate7 = switchState7; //store last state (for reset)
-    } while (switchcounter2 < fr); //Run this do, while the counter is LESS THAN the fixed ratio
+    } while (switchCounter2 < fr); //Run this do, while the counter is LESS THAN the fixed ratio
 
     triggerRelay();
     return;

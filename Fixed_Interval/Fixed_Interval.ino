@@ -6,7 +6,7 @@
 
 int delay_value = 500; // how fast the audible click is (higher=longer)
 int fr = 5; // amount of button presses to start the relay
-int switchcounter2 = 0; // counter for small button presses
+int switchCounter2 = 0; // counter for small button presses
 int delay_seconds = 10; // seconds to delay the dispense button activation
 
 void setup() {
@@ -37,7 +37,7 @@ void triggerRelay() {
     digitalWrite(10, HIGH);
     digitalWrite(10, LOW);
     digitalWrite(5, LOW);
-    switchcounter2 = 0;
+    switchCounter2 = 0;
   }
 }
 

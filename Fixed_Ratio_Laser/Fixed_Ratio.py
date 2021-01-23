@@ -52,19 +52,27 @@ def triggerRelay():
     f.write("Relay Triggered!")
     f.write(datetime.datetime.now().strftime('%H%M%S')) 
     
-    while GPIO.input(31) == GPIO.LOW:
-        for x in range(timesToClick):
-            GPIO.output(36, GPIO.LOW)
-            GPIO.output(10, GPIO.LOW)
-            GPIO.output(36, GPIO.HIGH)
-            GPIO.output(10, GPIO.HIGH)
-            time.sleep(delay_value) ## Note this is is Seconds so might need .500
-            GPIO.output(10, GPIO.LOW)
-            time.sleep(delay_value) ## Note this is is Seconds so might need .500
-            GPIO.output(10, GPIO.HIGH)
-            GPIO.output(10, GPIO.LOW)
-            GPIO.output(36, GPIO.LOW)
-            switchCounter2 = 0
+    laser_state = GPIO.LOW
+    max_time = 0.500
+    
+    while laser_state == GPIO.LOW:
+        if GPIO.input(31) == GPIO.HIGH: laser_state = GPIO.HIGH
+        GPIO.output(36, GPIO.LOW)
+        GPIO.output(10, GPIO.LOW)
+        GPIO.output(36, GPIO.HIGH)
+        GPIO.output(10, GPIO.HIGH)
+        start_time = time.time()
+        while (time.time() - start_time) < max_time:
+            if GPIO.input(31) == GPIO.HIGH: laser_state = GPIO.HIGH
+        GPIO.output(10, GPIO.LOW)
+        start_time = time.time()
+        while (time.time() - start_time) < max_time:
+            if GPIO.input(31) == GPIO.HIGH: laser_state = GPIO.HIGH
+        GPIO.output(10, GPIO.HIGH)
+        GPIO.output(10, GPIO.LOW)
+        GPIO.output(36, GPIO.LOW)
+        if GPIO.input(31) == GPIO.HIGH: laser_state = GPIO.HIGH
+    switchCounter2 = 0
 
 def loop():
     global fr, switchCounter2
