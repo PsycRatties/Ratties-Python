@@ -18,7 +18,7 @@ file_name = os.getcwd() + '/log' + \
     datetime.datetime.now().strftime('%Y_%m_%d-%I_%M_%S_%p') + '.txt'
 f = open(file_name, 'w')
 
-sleep_times = list()
+sleep_times: list
 def setup():
     """
     function to setup GPIO board for switches.
