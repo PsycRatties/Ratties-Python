@@ -42,6 +42,7 @@ def triggerRelay():
     Uses 'delay_value', 'timesToClick'
 
     """
+    global timesToClick
     global delay_value, timesToClick
     GPIO.output(37, GPIO.LOW)
     GPIO.output(33, GPIO.LOW)
@@ -53,9 +54,9 @@ def triggerRelay():
         GPIO.output(10, GPIO.HIGH)
         time.sleep(delay_value) ## Note this is is Seconds so might need .500
         GPIO.output(10, GPIO.LOW)
-        #time.sleep(delay_value) ## Note this is is Seconds so might need .500
-        #GPIO.output(10, GPIO.HIGH)
-        #GPIO.output(10, GPIO.LOW)
+        time.sleep(delay_value) ## Note this is is Seconds so might need .500
+        GPIO.output(10, GPIO.HIGH)
+        GPIO.output(10, GPIO.LOW)
         GPIO.output(36, GPIO.LOW)
         switchcounter2 = 0
 
