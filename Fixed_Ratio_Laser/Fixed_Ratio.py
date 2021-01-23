@@ -20,7 +20,7 @@ def setup():
     void function to setup GPIO board for switches.
     Sets input and output of varius pins
     """
-    GPIO.setup(4, GPIO.OUT) ## House light LED
+    GPIO.setup(7, GPIO.OUT) ## House light LED
     GPIO.setup(31, GPIO.IN) ## right switch (spst momentary n.o.) 2
     GPIO.setup(33, GPIO.OUT) ## LED red middle 3
     GPIO.setup(35, GPIO.IN) ## right switch, bottom black (spst) 4
@@ -31,7 +31,7 @@ def setup():
     #Need to change
     GPIO.setup(10, GPIO.OUT) ## Relay 10
 
-    GPIO.output(4, GPIO.LOW)
+    GPIO.output(7, GPIO.LOW)
     GPIO.output(33, GPIO.LOW)
     GPIO.output(36, GPIO.LOW)
     GPIO.output(37, GPIO.LOW)
@@ -51,7 +51,7 @@ def triggerRelay():
 
     f.write("Relay Triggered!")
     f.write(datetime.datetime.now().strftime('%H%M%S')) 
-    GPIO.output(4, GPIO.HIGH)
+    GPIO.output(7, GPIO.HIGH)
     while GPIO.input(31) == GPIO.LOW:
         for x in range(timesToClick):
             GPIO.output(36, GPIO.LOW)
@@ -65,7 +65,7 @@ def triggerRelay():
             GPIO.output(10, GPIO.LOW)
             GPIO.output(36, GPIO.LOW)
             switchCounter2 = 0
-    GPIO.output(4, GPIO.LOW)
+    GPIO.output(7, GPIO.LOW)
 
 def loop():
     global fr, switchCounter2
