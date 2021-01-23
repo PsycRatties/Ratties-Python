@@ -18,7 +18,7 @@ file_name = os.getcwd() + '/log' + \
     datetime.datetime.now().strftime('%Y_%m_%d-%I_%M_%S_%p') + '.txt'
 f = open(file_name, 'w')
 
-sleep_times = []
+sleep_times = list()
 def setup():
     """
     function to setup GPIO board for switches.
@@ -37,8 +37,8 @@ def setup():
     GPIO.setup(10, GPIO.OUT)  # Relay 10
 
     try:
-        with open('time.csv', newline='') as f:
-            reader = csv.reader(f)
+        with open('time.csv', newline='') as file:
+            reader = csv.reader(file)
             sleep_times = list(reader)
     except:
         sys.exit("COULD NOT FILD time.csv")
@@ -75,6 +75,7 @@ def loop():
     hasRun = False 
     GPIO.output(33, GPIO.LOW)
     GPIO.output(37, GPIO.LOW)
+    print("started loop")
 
     time_to_sleep = sleep_times[sleep_pos]
     f.write("Delay input time: " + str(time_to_sleep))
@@ -126,8 +127,9 @@ if __name__ == "__main__":
     setup()
     f.write("Program Started!")
     f.write(datetime.datetime.now().strftime('%H%M%S'))
+    print(sleep_times)
     while len(sleep_times) > runs:
-        runs = runs + 1
         loop()
+        runs = runs + 1
 
     f.close()
