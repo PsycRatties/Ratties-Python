@@ -91,7 +91,7 @@ def loop():
         f.write(datetime.datetime.now().strftime('%H%M%S'))
         GPIO.output(33, GPIO.HIGH)
 
-        while switchcounter2 < fr:
+        while switchcounter2 < vr:
             print(str(GPIO.input(38)) + " | " + str(lastswitchstate2))
             if GPIO.input(38) == GPIO.HIGH and lastswitchstate2 != GPIO.input(38):
                 f.write("Switch pressed")
