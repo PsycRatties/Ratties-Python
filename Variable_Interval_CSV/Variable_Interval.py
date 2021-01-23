@@ -77,10 +77,8 @@ def loop():
     hasRun = False 
     GPIO.output(33, GPIO.LOW)
     GPIO.output(37, GPIO.LOW)
-    print("started loop")
 
     time_to_sleep = float(sleep_times[sleep_pos][0])
-    print(time_to_sleep, type(time_to_sleep))
     f.write("Delay input time: " + str(time_to_sleep))
 
     if (GPIO.input(35) == GPIO.HIGH):

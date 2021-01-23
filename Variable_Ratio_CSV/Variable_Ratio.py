@@ -12,7 +12,6 @@ timesToClick = 5  # amount of times the relay should be triggered (default: 10)
 switchcounter2 = 0
 ratio_upper = 10
 ratio_lower = 2
-runIterations = 2  # Amount of time the script should loop
 runs = 0
 
 file_name = os.getcwd() + '/log' + \
@@ -20,11 +19,14 @@ file_name = os.getcwd() + '/log' + \
 f = open(file_name, 'w')
 
 vr_responses = list()
+
+
 def setup():
     """
     function to setup GPIO board for switches.
     Sets input and output of varius pins
     """
+    global vr_responses
     GPIO.setmode(GPIO.BOARD)
 
     GPIO.setup(31, GPIO.IN)  # right switch (spst momentary n.o.) 2
@@ -48,7 +50,7 @@ def setup():
             vr_responses = list(reader)
         print(vr_responses)
     except:
-        sys.exit("COULD NOT FILD responses.csv")
+        sys.exit("COULD NOT FIND responses.csv")
 
 
 def triggerRelay():
@@ -79,7 +81,10 @@ def triggerRelay():
         GPIO.output(36, GPIO.LOW)
         switchcounter2 = 0
 
+
 vr_pos = 0
+
+
 def loop():
     global vr_pos, vr_responses
     global switchcounter2
@@ -132,6 +137,7 @@ def loop():
         GPIO.output(33, GPIO.LOW)
         GPIO.output(37, GPIO.LOW)
     vr_pos = vr_pos + 1
+
 
 if __name__ == "__main__":
     # log program start and date and time
