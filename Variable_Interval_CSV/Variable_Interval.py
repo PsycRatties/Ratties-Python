@@ -79,7 +79,7 @@ def loop():
     GPIO.output(37, GPIO.LOW)
     print("started loop")
 
-    time_to_sleep = sleep_times[sleep_pos]
+    time_to_sleep = int(sleep_times[sleep_pos])
     print(time_to_sleep, type(time_to_sleep))
     f.write("Delay input time: " + str(time_to_sleep))
 
