@@ -47,6 +47,9 @@ def triggerRelay():
     GPIO.output(37, GPIO.LOW)
     GPIO.output(33, GPIO.LOW)
 
+    f.write("Relay Triggered!")
+    f.write(datetime.datetime.now().strftime('%H%M%S')) 
+
     for x in range(timesToClick):
         GPIO.output(36, GPIO.LOW)
         GPIO.output(10, GPIO.LOW)
