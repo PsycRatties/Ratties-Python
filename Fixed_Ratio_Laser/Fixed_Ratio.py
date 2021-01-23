@@ -20,6 +20,7 @@ def setup():
     void function to setup GPIO board for switches.
     Sets input and output of varius pins
     """
+    GPIO.setup(7, GPIO.OUT) ## House light LED
     GPIO.setup(31, GPIO.IN) ## right switch (spst momentary n.o.) 2
     GPIO.setup(33, GPIO.OUT) ## LED red middle 3
     GPIO.setup(35, GPIO.IN) ## right switch, bottom black (spst) 4
@@ -30,6 +31,7 @@ def setup():
     #Need to change
     GPIO.setup(10, GPIO.OUT) ## Relay 10
 
+    GPIO.output(7, GPIO.HIGH)
     GPIO.output(33, GPIO.LOW)
     GPIO.output(36, GPIO.LOW)
     GPIO.output(37, GPIO.LOW)
@@ -49,19 +51,20 @@ def triggerRelay():
 
     f.write("Relay Triggered!")
     f.write(datetime.datetime.now().strftime('%H%M%S')) 
-
-    for x in range(timesToClick):
-        GPIO.output(36, GPIO.LOW)
-        GPIO.output(10, GPIO.LOW)
-        GPIO.output(36, GPIO.HIGH)
-        GPIO.output(10, GPIO.HIGH)
-        time.sleep(delay_value) ## Note this is is Seconds so might need .500
-        GPIO.output(10, GPIO.LOW)
-        time.sleep(delay_value) ## Note this is is Seconds so might need .500
-        GPIO.output(10, GPIO.HIGH)
-        GPIO.output(10, GPIO.LOW)
-        GPIO.output(36, GPIO.LOW)
-        switchCounter2 = 0
+    
+    while GPIO.input(31) == GPIO.LOW:
+        for x in range(timesToClick):
+            GPIO.output(36, GPIO.LOW)
+            GPIO.output(10, GPIO.LOW)
+            GPIO.output(36, GPIO.HIGH)
+            GPIO.output(10, GPIO.HIGH)
+            time.sleep(delay_value) ## Note this is is Seconds so might need .500
+            GPIO.output(10, GPIO.LOW)
+            time.sleep(delay_value) ## Note this is is Seconds so might need .500
+            GPIO.output(10, GPIO.HIGH)
+            GPIO.output(10, GPIO.LOW)
+            GPIO.output(36, GPIO.LOW)
+            switchCounter2 = 0
 
 def loop():
     global fr, switchCounter2
@@ -117,5 +120,5 @@ if __name__== "__main__":
     while runIterations > runs:
         loop()
         runs = runs + 1
-
+    GPIO.output(7, GPIO.LOW)
     f.close()
