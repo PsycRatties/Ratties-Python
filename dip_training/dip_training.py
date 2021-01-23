@@ -9,7 +9,7 @@ delay_value = 500  # how fast the audible click is (higher=longer)
 interval_upper = 30  # highest time interval that can be selected
 interval_lower = 10  # lowest time interval that can be selected
 timesToClick = 5  # amount of times the relay should be triggered (default: 10)
-runIterations = 2 ## Amount of time the script should loop
+runIterations = 2  # Amount of time the script should loop
 runs = 0
 
 # Open File for Logging
@@ -72,21 +72,24 @@ def triggerRelay():
 
 start_time = time.time()
 def time_elapsed(delay_time):
-    print(time.time()-start_time)
-    return True
-    
+    if time.time()-start_time >= delay_time:
+        return True
+    return False
+
 def loop():
+    reinforced = False
     delay_seconds = random.randint(interval_lower, interval_upper) * 1000
     # turn off both LED's on start of script
     GPIO.output(33, GPIO.LOW)
     GPIO.output(37, GPIO.LOW)
 
-    while True:
+    while not reinforced:
         if (GPIO.input(40) == GPIO.HIGH and GPIO.input(38) == GPIO.HIGH) or time_elapsed(delay_seconds):
             triggerRelay()
+            reinforced = True
         elif (GPIO.input(35) == GPIO.HIGH and GPIO.input(31) == GPIO.HIGH) or time_elapsed(delay_seconds):
             triggerRelay()
-        delay_seconds = random.randint(interval_lower, interval_upper) * 1000
+            reinforced = True
 
 if __name__ == "__main__":
     # log program start and date and time
