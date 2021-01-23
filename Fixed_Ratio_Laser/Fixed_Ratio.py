@@ -71,7 +71,7 @@ def triggerRelay():
         GPIO.output(10, GPIO.HIGH)
         GPIO.output(10, GPIO.LOW)
         GPIO.output(36, GPIO.LOW)
-        laser_state = GPIO.input(31)
+        if GPIO.input(31) == GPIO.HIGH: laser_state = GPIO.HIGH
     switchCounter2 = 0
 
 def loop():
